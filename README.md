@@ -7,7 +7,7 @@ i used python as the GUI that displays the time the weather and the day and i wi
 ### Linux
 I am running DietPi on the raspi zero 2W
 ### Peripherals 
-· Screen: Elecrow 7" Touch Screen
-· Lexar 32Gb MicroSD
-· MicroUSB to USB OTG cable
-· Cheap USB Hub
+- Screen: Elecrow 7" Touch Screen
+- Lexar 32Gb MicroSD
+- MicroUSB to USB OTG cable
+- Cheap USB Hub
