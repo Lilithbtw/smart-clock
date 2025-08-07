@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QSpacerItem, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QSizePolicy, QSpacerItem
 from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtGui import QFontDatabase, QFont
 
@@ -17,41 +17,47 @@ class SmartClock(QWidget):
 
         vbox = QVBoxLayout()
 
+        # Top centered label
         self.label_2 = QLabel('This is the second label', self)
-        self.label_2.setStyleSheet("color: blue;"
-                                   "border: 3px solid green")
+        self.label_2.setStyleSheet("color: blue; border: 3px solid green")
+        self.label_2.setAlignment(Qt.AlignCenter)
+        vbox.addWidget(self.label_2, alignment=Qt.AlignTop | Qt.AlignHCenter)
 
-
-        self.label_3 = QLabel('This is the third label', self)
-        self.label_3.setStyleSheet("color: blue;"
-                                   "border: 3px solid green")
-
-
-        vbox.addWidget(self.label_2)
-
+        # Spacer between top and center
         vbox.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        # Clock in center
+        self.time_label.setAlignment(Qt.AlignCenter)
         vbox.addWidget(self.time_label, alignment=Qt.AlignCenter)
+
+        # Spacer between center and bottom
         vbox.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
+        # Bottom centered label
+        self.label_3 = QLabel(, self)
+        self.label_3.setStyleSheet("color: blue; border: 3px solid green")
+        self.label_3.setAlignment(Qt.AlignCenter)
+        vbox.addWidget(self.label_3, alignment=Qt.AlignBottom | Qt.AlignHCenter)
 
         self.setLayout(vbox)
 
-        self.time_label.setAlignment(Qt.AlignCenter)
-
+        # Font loading
         font_path = os.path.join(os.path.dirname(__file__), "fonts", "JetBrainsMono-Regular.ttf")
         font_id = QFontDatabase.addApplicationFont(font_path)
-
         if font_id != -1:
             font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
             font = QFont(font_family, 150)
         else:
             print("Failed to load JetBrains Mono. Using fallback font.")
             font = QFont("Sans Serif", 150)
-            
+
         self.time_label.setFont(font)
+
+        # Styling
         self.setStyleSheet("background-color: black")
         self.time_label.setStyleSheet("color: white")
-        
+
+        # Timer
         self.timer.timeout.connect(self.UpdateTime)
         self.timer.start(1000)
         self.UpdateTime()
