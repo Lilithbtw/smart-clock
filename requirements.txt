@@ -1,3 +1,8 @@
+certifi==2025.8.3
+charset-normalizer==3.4.3
+idna==3.10
 pyqt5==5.15.11
 pyqt5-qt5==5.15.17
 pyqt5-sip==12.17.0
+requests==2.32.4
+urllib3==2.5.0
