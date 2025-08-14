@@ -1,5 +1,9 @@
+# Backend Libs
 import sys
 import os
+import requests
+
+# Frontend Libs
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QSizePolicy, QSpacerItem
 from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtGui import QFontDatabase, QFont
@@ -17,27 +21,9 @@ class SmartClock(QWidget):
 
         vbox = QVBoxLayout()
 
-        # Top centered label
-        self.label_2 = QLabel('This is the second label', self)
-        self.label_2.setStyleSheet("color: blue; border: 3px solid green")
-        self.label_2.setAlignment(Qt.AlignCenter)
-        vbox.addWidget(self.label_2, alignment=Qt.AlignTop | Qt.AlignHCenter)
-
-        # Spacer between top and center
-        vbox.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
         # Clock in center
         self.time_label.setAlignment(Qt.AlignCenter)
         vbox.addWidget(self.time_label, alignment=Qt.AlignCenter)
-
-        # Spacer between center and bottom
-        vbox.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        # Bottom centered label
-        self.label_3 = QLabel(, self)
-        self.label_3.setStyleSheet("color: blue; border: 3px solid green")
-        self.label_3.setAlignment(Qt.AlignCenter)
-        vbox.addWidget(self.label_3, alignment=Qt.AlignBottom | Qt.AlignHCenter)
 
         self.setLayout(vbox)
 
