@@ -1,7 +1,6 @@
 # Backend Libs
 import sys
 import os
-import requests
 
 # Frontend Libs
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QSizePolicy, QSpacerItem
