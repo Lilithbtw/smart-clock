@@ -24,11 +24,9 @@ raw_latitude, raw_longitude = location.latitude, location.longitude
 lat = f"{raw_latitude:.3f}"
 lon = f"{raw_longitude:.3f}"
 
-print(raw_latitude, raw_longitude)
 
 url = f"{base_uri}/{method}.json?key={api_key}&q={lat},{lon}"
 
-print(url)
 response = requests.get(url)
 
 data = response.json()
@@ -39,6 +37,10 @@ current_ctemp = data["current"]["feelslike_c"]
 
 condition_icon_uri = current_condition["icon"]
 condition_text = current_condition["text"]
+
+print(current_condition)
+print(current_ctemp)
+print(condition_text)
 
 if "night" in condition_icon_uri:
     print("It's night time")
