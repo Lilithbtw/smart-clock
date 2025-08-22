@@ -94,16 +94,13 @@ class SmartClock(QWidget):
 
     def CheckWeather(self):
         try:
-            # Verificar que weather_monitor existe
             if not self.weather_monitor:
                 print("WeatherMonitor no está inicializado")
                 self.ctemp.setText("Error Init")
                 return
             
-            # Llamar update_weather() del weather_monitor
             success = self.weather_monitor.update_weather()
             
-            # Actualizar la UI con el valor actual (exitoso o no)
             if hasattr(self.weather_monitor, 'ctemp') and self.weather_monitor.ctemp:
                 self.ctemp.setText(self.weather_monitor.ctemp)
             else:
