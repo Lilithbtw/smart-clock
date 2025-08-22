@@ -12,21 +12,22 @@ from weather import WeatherMonitor
 class SmartClock(QWidget):
     def __init__(self):
         super().__init__()
-        #* Initialize QLabels and run initUi*
+
+        # Initialize Qlabels
         self.time_label = QLabel(self)
         self.ctemp = QLabel(self)
         self.weather = QLabel(self)
         self.day = QLabel(self)
         
-        # Crear una sola instancia de WeatherMonitor
-        self.weather_monitor = WeatherMonitor()
+        try:
+            self.weather_monitor = WeatherMonitor()
+            print("WeatherMonitor inicializado correctamente")
+        except Exception as e:
+            print(f"Error inicializando WeatherMonitor: {e}")
+            self.weather_monitor = None
         
-        # Timers separados para diferentes funciones
         self.time_timer = QTimer(self)
         self.weather_timer = QTimer(self)
-        
-        # Contador para controlar actualizaciones de clima
-        self.weather_update_counter = 0
         
         self.initUI()
 
@@ -36,21 +37,21 @@ class SmartClock(QWidget):
         
         vbox = QVBoxLayout()
         
-        #* ctemp*
+        # Temperature
         self.ctemp.setAlignment(Qt.AlignRight | Qt.AlignTop)
         vbox.addWidget(self.ctemp, alignment=Qt.AlignRight | Qt.AlignTop)
         
-        #* Clock en el centro*
+        # Clock in the Center
         self.time_label.setAlignment(Qt.AlignCenter)
         vbox.addWidget(self.time_label, alignment=Qt.AlignCenter)
         
-        #* Día*
+        # Day
         self.day.setAlignment(Qt.AlignCenter)
         vbox.addWidget(self.day, alignment=Qt.AlignBottom | Qt.AlignHCenter)
         
         self.setLayout(vbox)
         
-        #* Font loading*
+        # Font loading
         font_path = os.path.join(os.path.dirname(__file__), "fonts", "JetBrainsMono-Regular.ttf")
         font_id = QFontDatabase.addApplicationFont(font_path)
         
@@ -67,18 +68,18 @@ class SmartClock(QWidget):
         self.ctemp.setFont(font_small)
         self.day.setFont(font_small)
         
-        #* Styling*
+        # Styling
         self.setStyleSheet("background-color: black")
         self.time_label.setStyleSheet("color: white")
         self.ctemp.setStyleSheet("color: white")
         self.day.setStyleSheet("color: white")
         
-        #* Timer para reloj (cada segundo)*
+        # Timer para reloj (cada segundo)
         self.time_timer.timeout.connect(self.UpdateTime)
         self.time_timer.timeout.connect(self.UpdateDay)
         self.time_timer.start(1000)
         
-        #* Timer para clima (cada 10 minutos = 600000 ms)*
+        # Timer para clima (cada 10 minutos = 600000 ms)
         self.weather_timer.timeout.connect(self.CheckWeather)
         self.weather_timer.start(600000)  # 10 minutos
         
@@ -93,11 +94,17 @@ class SmartClock(QWidget):
 
     def CheckWeather(self):
         try:
+            # Verificar que weather_monitor existe
+            if not self.weather_monitor:
+                print("WeatherMonitor no está inicializado")
+                self.ctemp.setText("Error Init")
+                return
+            
             # Llamar update_weather() del weather_monitor
             success = self.weather_monitor.update_weather()
             
             # Actualizar la UI con el valor actual (exitoso o no)
-            if self.weather_monitor.ctemp:
+            if hasattr(self.weather_monitor, 'ctemp') and self.weather_monitor.ctemp:
                 self.ctemp.setText(self.weather_monitor.ctemp)
             else:
                 self.ctemp.setText("--°C")
@@ -108,7 +115,7 @@ class SmartClock(QWidget):
         except AttributeError as e:
             print(f"Error de atributo: {e}")
             print("Verificar que weather_monitor esté inicializado correctamente")
-            self.ctemp.setText("Error")
+            self.ctemp.setText("Error Attr")
         except Exception as e:
             print(f"Error updating weather display: {e}")
             self.ctemp.setText("--°C")
