@@ -1,111 +1,94 @@
 import requests
 import os
 import time
-
 from geopy.geocoders import Nominatim
 from dotenv import load_dotenv
 
-def loadConfig():
-    env_vars = ["WEATHER_API", "CITY", "UPDATE_INTERVAL"]
 
-    for var in env_vars:
-        if var in os.environ:
-            del os.environ[var]
+class WeatherMonitor:
+    def __init__(self):
+        self.api_key, self.city, self.update_interval = self.load_config()
+        self.ctemp = None
+        self.condition_text = None
+        self.condition_icon_uri = None
+        self.is_daytime = None
 
-    # Load Values
-    load_dotenv(override=True)
-    
-    api_key = os.getenv("WEATHER_API")
-    city = os.getenv("CITY")
-    update_interval = float(os.getenv("UPDATE_INTERVAL"))
+    def load_config(self):
+        env_vars = ["WEATHER_API", "CITY", "UPDATE_INTERVAL"]
 
-    return api_key, city, update_interval
+        for var in env_vars:
+            if var in os.environ:
+                del os.environ[var]
 
+        load_dotenv(override=True)
+        api_key = os.getenv("WEATHER_API")
+        city = os.getenv("CITY")
+        update_interval = float(os.getenv("UPDATE_INTERVAL"))
 
-def GetLocation(city):
-    geolocator = Nominatim(user_agent="smart-clock")
-    location = geolocator.geocode(city)
+        return api_key, city, update_interval
 
-    lat = f"{location.latitude:.3f}"
-    lon = f"{location.longitude:.3f}"
-    
-    return lat, lon
+    def get_location(self):
+        geolocator = Nominatim(user_agent="smart-clock")
+        location = geolocator.geocode(self.city)
+        lat = f"{location.latitude:.3f}"
+        lon = f"{location.longitude:.3f}"
+        return lat, lon
 
-def fetchData(api_key, city):
-    """Fetch current Weather for the city"""
-    try:
-        method = "current"
-        base_uri = "https://api.weatherapi.com/v1"
-        url = f"{base_uri}/{method}.json?key={api_key}&q={GetLocation(city)[0]},{GetLocation(city)[1]}"
-        response = requests.get(url)
+    def fetch_data(self):
+        """Fetch current weather for the city"""
+        try:
+            method = "current"
+            base_uri = "https://api.weatherapi.com/v1"
+            lat, lon = self.get_location()
+            url = f"{base_uri}/{method}.json?key={self.api_key}&q={lat},{lon}"
+            response = requests.get(url)
+            return response.json()
+        except Exception as e:
+            print(f"Error Fetching Weather {e}")
+            return None
 
-        return response.json()
-   
-    except Exception as e:
-        print(f"Error Fetching Weather {e}")
-        return None
+    def update_weather(self):
+        """Update temperature, condition, and daytime info"""
+        try:
+            data = self.fetch_data()
+            if not data:
+                return False
 
-
-def getTemp(api_key, city):
-    try:
-        data = fetchData(api_key, city)
-        if data:
             raw_ctemp = data["current"]["feelslike_c"]
+            self.ctemp = f"{int(raw_ctemp)}ºC"
 
-            ctemp = str(int(raw_ctemp))
+            condition = data["current"]["condition"]
+            self.condition_text = condition["text"]
+            self.condition_icon_uri = condition["icon"]
 
-            return ctemp
-        return None
-        
-    except Exception as e:
-        print(f"Error Fetching Temperature {e}")
-        return None
+            self.is_daytime = "day" in self.condition_icon_uri
 
-def getCondition(api_key, city):
-    try:
-        data = fetchData(api_key, city)
-        if data:
-            current_condition = data["current"]["condition"]
+            return True
+        except Exception as e:
+            print(f"Error Updating Weather {e}")
+            return False
 
-            condition_icon_uri = current_condition["icon"]
-            condition_text = current_condition["text"]
+    def run(self):
+        """Run continuous weather monitoring"""
+        print("Starting weather monitor")
+        print("Press Ctrl+C to stop\n")
 
-            return condition_text, condition_icon_uri
-        return None, None
-    except Exception as e:
-        print(f"Error Fetching Condition {e}")
-        return None, None
-    
-def checkDay(condition):
-    if "day" in condition:
-        return True
-    elif "night" in condition:
-        return False
-    return False
+        try:
+            while True:
+                if self.update_weather():
+                    print(
+                        f"Temperature: {self.ctemp} | "
+                        f"Condition: {self.condition_text} | "
+                        f"Daytime: {self.is_daytime}"
+                    )
+                else:
+                    print("Could not fetch weather")
+                time.sleep(self.update_interval)
+
+        except KeyboardInterrupt:
+            print("\nMonitoring Stopped")
 
 
-def main():
-    print("Starting weather monitor")
-    print("Press Ctrl+C to stop\n")
-
-    try:
-        while True:
-            api_key, city, update_interval = loadConfig()
-
-            ctemp = getTemp(api_key, city)
-
-            condition_text, condition_icon_uri = getCondition(api_key, city)
-
-            print(checkDay(condition_icon_uri))
-            
-            if ctemp:
-                ctemp += "ºC"
-                print(f"Temperature: {ctemp}ºC | Condition: {condition_text}")
-            else:
-                print("Could not fetch weather")
-            time.sleep(update_interval)
-
-    except KeyboardInterrupt:
-        print("\nMonitoring Stopped")
-
-main()
+if __name__ == "__main__":
+    monitor = WeatherMonitor()
+    monitor.run()
