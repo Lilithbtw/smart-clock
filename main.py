@@ -8,7 +8,7 @@ from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtGui import QFontDatabase, QFont
 
 # weather.py import
-import weather as wth
+from weather import WeatherMonitor
 
 class SmartClock(QWidget):
     def __init__(self):
@@ -61,12 +61,12 @@ class SmartClock(QWidget):
 
         # Timer
         self.timer.timeout.connect(self.UpdateTime)
-        self.timer.start(1000)
+        self.timer.start(1*1000)
         self.UpdateTime()
 
         # Weather and ctemp
         self.timer.timeout.connect(self.CheckWeather)
-        self.timer.start(1000)
+        self.timer.start(1*1000)
         self.CheckWeather()
 
     def UpdateTime(self):
@@ -74,7 +74,9 @@ class SmartClock(QWidget):
         self.time_label.setText(current_time)
 
     def CheckWeather(self):
-        self.ctemp.setText(wth.ctemp)
+        monitor = WeatherMonitor()
+        monitor.update_weather()
+        self.ctemp.setText(monitor.ctemp)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

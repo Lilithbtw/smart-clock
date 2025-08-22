@@ -13,6 +13,8 @@ class WeatherMonitor:
         self.condition_icon_uri = None
         self.is_daytime = None
 
+        self._last_state = None
+
     def load_config(self):
         env_vars = ["WEATHER_API", "CITY", "UPDATE_INTERVAL"]
 
@@ -55,15 +57,22 @@ class WeatherMonitor:
                 return False
 
             raw_ctemp = data["current"]["feelslike_c"]
-            self.ctemp = f"{int(raw_ctemp)}ºC"
+            new_ctemp = f"{int(raw_ctemp)}ºC"
 
             condition = data["current"]["condition"]
-            self.condition_text = condition["text"]
-            self.condition_icon_uri = condition["icon"]
+            new_condition_text = condition["text"]
+            new_icon_uri = condition["icon"]
 
-            self.is_daytime = "day" in self.condition_icon_uri
+            new_is_daytime = "day" in new_icon_uri
 
-            return True
+            new_state = (new_ctemp, new_condition_text, new_icon_uri, new_is_daytime)
+
+            if new_state != self._last_state:
+                self.ctemp, self.condition_text, self.condition_icon_uri, self.is_daytime = new_state
+                self._last_state = new_state
+                return True
+            
+            return False
         except Exception as e:
             print(f"Error Updating Weather {e}")
             return False
@@ -75,14 +84,14 @@ class WeatherMonitor:
 
         try:
             while True:
+                self.api_key, self.city, self.update_interval = self.load_config()
                 if self.update_weather():
                     print(
-                        f"Temperature: {self.ctemp} | "
-                        f"Condition: {self.condition_text} | "
+                        f"Temperature: {self.ctemp} | ",
+                        f"Condition: {self.condition_text} | ",
                         f"Daytime: {self.is_daytime}"
                     )
-                else:
-                    print("Could not fetch weather")
+
                 time.sleep(self.update_interval)
 
         except KeyboardInterrupt:
