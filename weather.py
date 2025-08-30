@@ -61,17 +61,17 @@ class WeatherMonitor:
 
             condition = data["current"]["condition"]
             new_condition_text = condition["text"]
+            new_condition_code = condition["code"]
             new_icon_uri = condition["icon"]
 
             new_is_daytime = "day" in new_icon_uri
 
-            new_state = (new_ctemp, new_condition_text, new_icon_uri, new_is_daytime)
+            new_state = (new_ctemp, new_condition_text, new_icon_uri, new_is_daytime, new_condition_code)
 
             if new_state != self._last_state:
-                self.ctemp, self.condition_text, self.condition_icon_uri, self.is_daytime = new_state
+                self.ctemp, self.condition_text, self.condition_icon_uri, self.is_daytime, self.condition_code = new_state
                 self._last_state = new_state
                 return True
-            
             return False
         except Exception as e:
             print(f"Error Updating Weather {e}")
@@ -89,6 +89,7 @@ class WeatherMonitor:
                     print(
                         f"Temperature: {self.ctemp} | ",
                         f"Condition: {self.condition_text} | ",
+                        f"Code: {self.condition_code} | ",
                         f"Daytime: {self.is_daytime}"
                     )
 
@@ -96,7 +97,6 @@ class WeatherMonitor:
 
         except KeyboardInterrupt:
             print("\nMonitoring Stopped")
-
 
 if __name__ == "__main__":
     monitor = WeatherMonitor()

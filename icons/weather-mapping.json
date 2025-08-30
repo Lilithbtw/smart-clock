@@ -1,0 +1,482 @@
+{
+  "1000": {
+    "day": {
+      "description": "Sunny",
+      "icon": "clear-day.svg"
+    },
+    "night": {
+      "description": "Clear",
+      "icon": "clear-night.svg"
+    }
+  },
+  "1003": {
+    "day": {
+      "description": "Partly Cloudy",
+      "icon": "cloudy-1-day.svg"
+    },
+    "night": {
+      "description": "Partly Cloudy",
+      "icon": "cloudy-1-night.svg"
+    }
+  },
+  "1006": {
+    "day": {
+      "description": "Cloudy",
+      "icon": "cloudy-2-day.svg"
+    },
+    "night": {
+      "description": "Cloudy",
+      "icon": "cloudy-2-night.svg"
+    }
+  },
+  "1009": {
+    "day": {
+      "description": "Overcast",
+      "icon": "cloudy-3-day.svg"
+    },
+    "night": {
+      "description": "Overcast",
+      "icon": "cloudy-3-night.svg"
+    }
+  },
+  "1030": {
+    "day": {
+      "description": "Mist",
+      "icon": "haze-day.svg"
+    },
+    "night": {
+      "description": "Mist",
+      "icon": "haze-night.svg"
+    }
+  },
+  "1063": {
+    "day": {
+      "description": "Patchy rain nearby",
+      "icon": "rainy-1-day.svg"
+    },
+    "night": {
+      "description": "Patchy rain nearby",
+      "icon": "rainy-1-night.svg"
+    }
+  },
+  "1066": {
+    "day": {
+      "description": "Patchy snow nearby",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Patchy snow nearby",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1069": {
+    "day": {
+      "description": "Patchy sleet nearby",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Patchy sleet nearby",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1072": {
+    "day": {
+      "description": "Patchy freezing drizzle nearby",
+      "icon": "frost-day.svg"
+    },
+    "night": {
+      "description": "Patchy freezing drizzle nearby",
+      "icon": "frost-night.svg"
+    }
+  },
+  "1087": {
+    "day": {
+      "description": "Thundery outbreaks in nearby",
+      "icon": "isolated-thunderstorms-day.svg"
+    },
+    "night": {
+      "description": "Thundery outbreaks in nearby",
+      "icon": "isolated-thunderstorms-night.svg"
+    }
+  },
+  "1114": {
+    "day": {
+      "description": "Blowing snow",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Blowing snow",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1117": {
+    "day": {
+      "description": "Blizzard",
+      "icon": "snowy-3-day.svg"
+    },
+    "night": {
+      "description": "Blizzard",
+      "icon": "snowy-3-night.svg"
+    }
+  },
+  "1135": {
+    "day": {
+      "description": "Fog",
+      "icon": "fog-day.svg"
+    },
+    "night": {
+      "description": "Fog",
+      "icon": "fog-night.svg"
+    }
+  },
+  "1147": {
+    "day": {
+      "description": "Freezing fog",
+      "icon": "fog-day.svg"
+    },
+    "night": {
+      "description": "Freezing fog",
+      "icon": "fog-night.svg"
+    }
+  },
+  "1150": {
+    "day": {
+      "description": "Patchy light drizzle",
+      "icon": "rainy-1-day.svg"
+    },
+    "night": {
+      "description": "Patchy light drizzle",
+      "icon": "rainy-1-night.svg"
+    }
+  },
+  "1153": {
+    "day": {
+      "description": "Light drizzle",
+      "icon": "rainy-1-day.svg"
+    },
+    "night": {
+      "description": "Light drizzle",
+      "icon": "rainy-1-night.svg"
+    }
+  },
+  "1168": {
+    "day": {
+      "description": "Freezing drizzle",
+      "icon": "frost-day.svg"
+    },
+    "night": {
+      "description": "Freezing drizzle",
+      "icon": "frost-night.svg"
+    }
+  },
+  "1171": {
+    "day": {
+      "description": "Heavy freezing drizzle",
+      "icon": "frost-day.svg"
+    },
+    "night": {
+      "description": "Heavy freezing drizzle",
+      "icon": "frost-night.svg"
+    }
+  },
+  "1180": {
+    "day": {
+      "description": "Patchy light rain",
+      "icon": "rainy-1-day.svg"
+    },
+    "night": {
+      "description": "Patchy light rain",
+      "icon": "rainy-1-night.svg"
+    }
+  },
+  "1183": {
+    "day": {
+      "description": "Light rain",
+      "icon": "rainy-1-day.svg"
+    },
+    "night": {
+      "description": "Light rain",
+      "icon": "rainy-1-night.svg"
+    }
+  },
+  "1186": {
+    "day": {
+      "description": "Moderate rain at times",
+      "icon": "rainy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate rain at times",
+      "icon": "rainy-2-night.svg"
+    }
+  },
+  "1189": {
+    "day": {
+      "description": "Moderate rain",
+      "icon": "rainy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate rain",
+      "icon": "rainy-2-night.svg"
+    }
+  },
+  "1192": {
+    "day": {
+      "description": "Heavy rain at times",
+      "icon": "rainy-3-day.svg"
+    },
+    "night": {
+      "description": "Heavy rain at times",
+      "icon": "rainy-3-night.svg"
+    }
+  },
+  "1195": {
+    "day": {
+      "description": "Heavy rain",
+      "icon": "rainy-3-day.svg"
+    },
+    "night": {
+      "description": "Heavy rain",
+      "icon": "rainy-3-night.svg"
+    }
+  },
+  "1198": {
+    "day": {
+      "description": "Light freezing rain",
+      "icon": "frost-day.svg"
+    },
+    "night": {
+      "description": "Light freezing rain",
+      "icon": "frost-night.svg"
+    }
+  },
+  "1201": {
+    "day": {
+      "description": "Moderate or heavy freezing rain",
+      "icon": "frost-day.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy freezing rain",
+      "icon": "frost-night.svg"
+    }
+  },
+  "1204": {
+    "day": {
+      "description": "Light sleet",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Light sleet",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1207": {
+    "day": {
+      "description": "Moderate or heavy sleet",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy sleet",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1210": {
+    "day": {
+      "description": "Patchy light snow",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Patchy light snow",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1213": {
+    "day": {
+      "description": "Light snow",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Light snow",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1216": {
+    "day": {
+      "description": "Patchy moderate snow",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Patchy moderate snow",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1219": {
+    "day": {
+      "description": "Moderate snow",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate snow",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1222": {
+    "day": {
+      "description": "Patchy heavy snow",
+      "icon": "snowy-3-day.svg"
+    },
+    "night": {
+      "description": "Patchy heavy snow",
+      "icon": "snowy-3-night.svg"
+    }
+  },
+  "1225": {
+    "day": {
+      "description": "Heavy snow",
+      "icon": "snowy-3-day.svg"
+    },
+    "night": {
+      "description": "Heavy snow",
+      "icon": "snowy-3-night.svg"
+    }
+  },
+  "1237": {
+    "day": {
+      "description": "Ice pellets",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Ice pellets",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1240": {
+    "day": {
+      "description": "Light rain shower",
+      "icon": "rainy-1-day.svg"
+    },
+    "night": {
+      "description": "Light rain shower",
+      "icon": "rainy-1-night.svg"
+    }
+  },
+  "1243": {
+    "day": {
+      "description": "Moderate or heavy rain shower",
+      "icon": "rainy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy rain shower",
+      "icon": "rainy-2-night.svg"
+    }
+  },
+  "1246": {
+    "day": {
+      "description": "Torrential rain shower",
+      "icon": "rainy-3-day.svg"
+    },
+    "night": {
+      "description": "Torrential rain shower",
+      "icon": "rainy-3-night.svg"
+    }
+  },
+  "1249": {
+    "day": {
+      "description": "Light sleet showers",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Light sleet showers",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1252": {
+    "day": {
+      "description": "Moderate or heavy sleet showers",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy sleet showers",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1255": {
+    "day": {
+      "description": "Light snow showers",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Light snow showers",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1258": {
+    "day": {
+      "description": "Moderate or heavy snow showers",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy snow showers",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1261": {
+    "day": {
+      "description": "Light showers of ice pellets",
+      "icon": "snowy-1-day.svg"
+    },
+    "night": {
+      "description": "Light showers of ice pellets",
+      "icon": "snowy-1-night.svg"
+    }
+  },
+  "1264": {
+    "day": {
+      "description": "Moderate or heavy showers of ice pellets",
+      "icon": "snowy-2-day.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy showers of ice pellets",
+      "icon": "snowy-2-night.svg"
+    }
+  },
+  "1273": {
+    "day": {
+      "description": "Patchy light rain in area with thunder",
+      "icon": "scattered-thunderstorms-day.svg"
+    },
+    "night": {
+      "description": "Patchy light rain in area with thunder",
+      "icon": "scattered-thunderstorms-night.svg"
+    }
+  },
+  "1276": {
+    "day": {
+      "description": "Moderate or heavy rain in area with thunder",
+      "icon": "thunderstorm.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy rain in area with thunder",
+      "icon": "thunderstorm.svg"
+    }
+  },
+  "1279": {
+    "day": {
+      "description": "Patchy light snow in area with thunder",
+      "icon": "scattered-thunderstorms-day.svg"
+    },
+    "night": {
+      "description": "Patchy light snow in area with thunder",
+      "icon": "scattered-thunderstorms-night.svg"
+    }
+  },
+  "1282": {
+    "day": {
+      "description": "Moderate or heavy snow in area with thunder",
+      "icon": "thunderstorm.svg"
+    },
+    "night": {
+      "description": "Moderate or heavy snow in area with thunder",
+      "icon": "thunderstorm.svg"
+    }
+  }
+}

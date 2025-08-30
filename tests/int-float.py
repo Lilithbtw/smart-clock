@@ -1,3 +1,3 @@
-n = 10.5456456
+n = 10.9
 
-print(str(int(n)),type(str(int(n))))
+print(str(int(n)))

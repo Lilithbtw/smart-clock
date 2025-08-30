@@ -17,13 +17,14 @@ class SmartClock(QWidget):
         self.time_label = QLabel(self)
         self.ctemp = QLabel(self)
         self.weather = QLabel(self)
+        self.weather_condition = QLabel(self)
         self.day = QLabel(self)
         
         try:
             self.weather_monitor = WeatherMonitor()
-            print("WeatherMonitor inicializado correctamente")
+            print("WeatherMonitor correctly initialized")
         except Exception as e:
-            print(f"Error inicializando WeatherMonitor: {e}")
+            print(f"Error initializing WeatherMonitor: {e}")
             self.weather_monitor = None
         
         self.time_timer = QTimer(self)
@@ -40,11 +41,21 @@ class SmartClock(QWidget):
         # Temperature
         self.ctemp.setAlignment(Qt.AlignRight | Qt.AlignTop)
         vbox.addWidget(self.ctemp, alignment=Qt.AlignRight | Qt.AlignTop)
-        
+
+        # Spacer
+        vbox.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
         # Clock in the Center
         self.time_label.setAlignment(Qt.AlignCenter)
         vbox.addWidget(self.time_label, alignment=Qt.AlignCenter)
+
+        # Weather condition
+        self.weather_condition.setAlignment(Qt.AlignCenter)
+        vbox.addWidget(self.weather_condition, alignment=Qt.AlignCenter)
         
+        # Spacer
+        vbox.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
         # Day
         self.day.setAlignment(Qt.AlignCenter)
         vbox.addWidget(self.day, alignment=Qt.AlignBottom | Qt.AlignHCenter)
@@ -58,21 +69,24 @@ class SmartClock(QWidget):
         if font_id != -1:
             font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
             font = QFont(font_family, 150)
-            font_small = QFont(font_family, 25)
+            font_small = QFont(font_family, 20)
+            font_medium = QFont(font_family, 25)
         else:
             print("Failed to load JetBrains Mono. Using fallback font.")
             font = QFont("Sans Serif", 150)
-            font_small = QFont("Sans Serif", 25)
-        
+            font_small = QFont("Sans Serif", 20)
+            font_medium = QFont("Sans Serif", 25)
         self.time_label.setFont(font)
         self.ctemp.setFont(font_small)
         self.day.setFont(font_small)
+        self.weather_condition.setFont(font_medium)
         
         # Styling
         self.setStyleSheet("background-color: black")
         self.time_label.setStyleSheet("color: white")
         self.ctemp.setStyleSheet("color: white")
         self.day.setStyleSheet("color: white")
+        self.weather_condition.setStyleSheet("color: #888888")
         
         # Timer para reloj (cada segundo)
         self.time_timer.timeout.connect(self.UpdateTime)
@@ -83,7 +97,7 @@ class SmartClock(QWidget):
         self.weather_timer.timeout.connect(self.CheckWeather)
         self.weather_timer.start(600000)  # 10 minutos
         
-        #* Inicializar valores*
+        # Inicializar valores
         self.UpdateTime()
         self.UpdateDay()
         self.CheckWeather()  # Primera actualización del clima
@@ -95,7 +109,7 @@ class SmartClock(QWidget):
     def CheckWeather(self):
         try:
             if not self.weather_monitor:
-                print("WeatherMonitor no está inicializado")
+                print("WeatherMonitor is not initialized")
                 self.ctemp.setText("Error Init")
                 return
             
@@ -105,13 +119,18 @@ class SmartClock(QWidget):
                 self.ctemp.setText(self.weather_monitor.ctemp)
             else:
                 self.ctemp.setText("--°C")
-                
+
+            if hasattr(self.weather_monitor, "condition_text") and self.weather_monitor.condition_text:
+                self.weather_condition.setText(self.weather_monitor.condition_text)
+            else:
+                self.weather_condition.setText("")
+
             if success:
                 print(f"Clima actualizado: {self.weather_monitor.ctemp}")
                 
         except AttributeError as e:
-            print(f"Error de atributo: {e}")
-            print("Verificar que weather_monitor esté inicializado correctamente")
+            print(f"Atribute Error: {e}")
+            print("Verify that weather_monitor is correctly initialized")
             self.ctemp.setText("Error Attr")
         except Exception as e:
             print(f"Error updating weather display: {e}")
