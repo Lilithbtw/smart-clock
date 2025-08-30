@@ -11,7 +11,6 @@ class WeatherMonitor:
         self.ctemp = None
         self.condition_text = None
         self.condition_icon_uri = None
-        self.is_daytime = None
 
         self._last_state = None
 
@@ -49,6 +48,18 @@ class WeatherMonitor:
             print(f"Error Fetching Weather {e}")
             return None
 
+    def is_daytime(self):
+        """Returns True or False depending on daytime info"""
+        data = self.fetch_data()
+        if not data:
+            return False
+        condition = data["current"]["condition"]
+        icon_uri = condition["icon"]
+        if "day" in icon_uri:
+            return True
+        else:
+            return False
+
     def update_weather(self):
         """Update temperature, condition, and daytime info"""
         try:
@@ -64,12 +75,10 @@ class WeatherMonitor:
             new_condition_code = condition["code"]
             new_icon_uri = condition["icon"]
 
-            new_is_daytime = "day" in new_icon_uri
-
-            new_state = (new_ctemp, new_condition_text, new_icon_uri, new_is_daytime, new_condition_code)
+            new_state = (new_ctemp, new_condition_text, new_icon_uri, new_condition_code)
 
             if new_state != self._last_state:
-                self.ctemp, self.condition_text, self.condition_icon_uri, self.is_daytime, self.condition_code = new_state
+                self.ctemp, self.condition_text, self.condition_icon_uri, self.condition_code = new_state
                 self._last_state = new_state
                 return True
             return False
@@ -90,7 +99,7 @@ class WeatherMonitor:
                         f"Temperature: {self.ctemp} | ",
                         f"Condition: {self.condition_text} | ",
                         f"Code: {self.condition_code} | ",
-                        f"Daytime: {self.is_daytime}"
+                        f"Daytime: {self.is_daytime()}"
                     )
 
                 time.sleep(self.update_interval)

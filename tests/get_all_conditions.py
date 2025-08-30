@@ -3,7 +3,7 @@ import os
 
 conditions = os.path.join(os.path.dirname(__file__), "conditions.json")
 
-with open(conditions, 'r', encoding='utf-8-sig') as file:
+with open(conditions, 'r') as file:
     data = json.load(file)
 
 for i in range(len(data)):
