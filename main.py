@@ -1,7 +1,7 @@
 #* Backend Libs*
 import sys
 import os
-from datetime import date, datetime
+from datetime import datetime
 import json
 #* Frontend Libs*
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QSizePolicy, QSpacerItem
