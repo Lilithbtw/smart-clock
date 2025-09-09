@@ -14,5 +14,5 @@ I am running DietPi on the raspi zero 2W
 - MicroUSB to USB OTG cable
 - Cheap USB Hub
 ## Final look
-In the End the GUI looks like this
+In the End the GUI looks like this<br>
 <img src="https://raw.githubusercontent.com/Lilithbtw/smart-clock/refs/heads/master/images/final-gui.png" alt="">
